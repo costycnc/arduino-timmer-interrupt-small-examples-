@@ -17,26 +17,36 @@
 
   http://www.arduino.cc/en/Tutorial/SerialEvent
 */
-
-String inputString = "";         // a String to hold incoming data
+char inputString[200];
+//String inputString = "";         // a String to hold incoming data
 bool stringComplete = false;  // whether the string is complete
+byte contor=0;
+byte contor1;
 
 void setup() {
   // initialize serial:
   Serial.begin(9600);
   // reserve 200 bytes for the inputString:
-  inputString.reserve(200);
+  //inputString.reserve(200);
 }
 
 void loop() {
   // print the string when a newline arrives:
-  delay(5000); 
-  if (stringComplete) {
-    Serial.println(inputString);
-    // clear the string:
-    inputString = "";
-    stringComplete = false;
+  delay(2000); 
+  while (contor1<10) {
+     Serial.print(inputString[contor1]);
+     contor1++;
   }
+ 
+    contor1=0;
+ 
+  //if (stringComplete) {
+    
+    Serial.println(contor);
+    // clear the string:
+   // inputString = "";
+   // stringComplete = false;
+//  }
 }
 
 /*
@@ -46,15 +56,21 @@ void loop() {
 */
 void serialEvent() {
   while (Serial.available()) {
+    contor++;
+    if(contor>10) contor=0;
     // get the new byte:
+    //char inChar = (char)Serial.read();
     char inChar = (char)Serial.read();
     // add it to the inputString:
-    inputString += inChar;
+    //inputString += inChar;
+    inputString[contor]= inChar;
     // if the incoming character is a newline, set a flag so the main loop can
     // do something about it:
+    /*
     if (inChar == '\n') {
       stringComplete = true;
       Serial.write("ok");
     }
+    */
   }
 }
