@@ -1,6 +1,13 @@
 //https://www.teachmemicro.com/arduino-timer-interrupt-tutorial#crayon-5dac2da71beb1111404788
 const int ledPin = 13;
 volatile byte state = LOW;
+
+/*     
+ *  https://github.com/enjoyneering/RotaryEncoder/blob/master/src/RotaryEncoder.cpp    
+ *      - declare all global variables inside ISR as "volatile", it prevent
+      compiler to make any optimization & unnecessary changes in the code
+      with the variable
+ */
  
  
 void setup() {
